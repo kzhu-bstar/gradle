@@ -55,6 +55,7 @@ import org.gradle.api.internal.artifacts.ivyservice.moduleconverter.Configuratio
 import org.gradle.api.internal.artifacts.ivyservice.publisher.DefaultIvyDependencyPublisher;
 import org.gradle.api.internal.artifacts.ivyservice.publisher.IvyBackedArtifactPublisher;
 import org.gradle.api.internal.artifacts.ivyservice.publisher.IvyXmlModuleDescriptorWriter;
+import org.gradle.api.internal.artifacts.ivyservice.resolveengine.result.AttributeContainerSerializer;
 import org.gradle.api.internal.artifacts.ivyservice.resolveengine.store.ResolutionResultsStoreFactory;
 import org.gradle.api.internal.artifacts.mvnsettings.LocalMavenRepositoryLocator;
 import org.gradle.api.internal.artifacts.query.ArtifactResolutionQueryFactory;
@@ -263,8 +264,8 @@ public class DefaultDependencyManagementServices implements DependencyManagement
                                                        ImmutableAttributesFactory attributesFactory,
                                                        BuildOperationExecutor buildOperationExecutor,
                                                        ArtifactTypeRegistry artifactTypeRegistry,
-                                                       VersionSelectorScheme versionSelectorScheme,
-                                                       ComponentSelectorConverter componentSelectorConverter) {
+                                                       ComponentSelectorConverter componentSelectorConverter,
+                                                       AttributeContainerSerializer attributeContainerSerializer) {
             return new ErrorHandlingConfigurationResolver(
                     new ShortCircuitEmptyConfigurationResolver(
                         new DefaultConfigurationResolver(
@@ -283,8 +284,8 @@ public class DefaultDependencyManagementServices implements DependencyManagement
                             moduleIdentifierFactory,
                             buildOperationExecutor,
                             artifactTypeRegistry,
-                            versionSelectorScheme,
-                            componentSelectorConverter),
+                            componentSelectorConverter,
+                            attributeContainerSerializer),
                         componentIdentifierFactory,
                         moduleIdentifierFactory));
         }
