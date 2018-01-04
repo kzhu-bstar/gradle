@@ -122,10 +122,19 @@ By default, Gradle caches changing versions of dependencies for 24 hours. The <<
 
 Gradle is flexible enough to treat any version as changing version. All you need to do is to set the property api:org.gradle.api.artifacts.ExternalModuleDependency#setChanging(boolean)[] to `true`.
 
+//An example of how to do this in the build script would be nice here
+//dependencies {
+//    implementation('mygroup:mymodule:0.0.1') {
+//       changing = true
+//    }
+//}
+
 [[sec:declaring_file_dependency]]
 ==== Declaring a file dependency
 
 Projects sometimes do not rely on a binary repository product, e.g. JFrog Artifactory or Sonatype Nexus, for hosting and resolving external dependencies. It's common practice to host those dependencies on a shared drive or check them into version control alongside the project source code. Those dependencies are referred to as _file dependencies_, the reason being that they represent a files without any metadata (like information about transitive dependencies, the origin or its author) attached to them.
+// It is probably ok to word it like this as this is an introduction, but it is also a bit missleading. You can also have dependencies with metadata in a folder on a shared drive or in version control. You do not nedd to "buy" a product for that. Any file system can serve as a repo with metadata. But how you do that is/should be described in the section about repositories.
+// Maybe we could just add an additional sentence here with a link to that section. Also, that section should include an example of a `file://` based repository (atm it only says "Gradle supports other protocols than http or https as part of the custom URL e.g. file..."). I think defining "real" repositories with metadata on any server (e.g. shared drive) is an interesting feature for many users.
 
 +++++
 <figure xmlns:xi="http://www.w3.org/2001/XInclude">
@@ -185,6 +194,7 @@ Many Gradle plugins add pre-defined configurations to your project. The Java plu
     </imageobject>
 </figure>
 +++++
+// exchange `compile` for `implementation` in the image
 
 You can also define configurations yourself, so-called _custom configurations_. A custom configuration is useful for separating the scope of dependencies needed for a dedicated purpose.
 
